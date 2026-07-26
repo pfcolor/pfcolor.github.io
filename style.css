@@ -46,7 +46,7 @@ h1{
 .intro{
   font-size:15.5px;
   color:var(--ink-soft);
-  max-width:46ch;
+  max-width:52ch;
 }
 .intro a{color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(59,114,174,0.3);}
 .intro a:hover{border-bottom-color:var(--accent);}
