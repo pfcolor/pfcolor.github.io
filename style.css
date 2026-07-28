@@ -126,6 +126,7 @@ section:last-child{ margin-bottom:0; }
 .book .title a:hover{ color:var(--accent); }
 .book .sub{ font-size:13.5px; color:var(--ink-soft); }
 .book .cover-link{ display:block; flex-shrink:0; }
+.book .cover.forthcoming{ opacity:0.25; }
 
 /* list rows — papers / articles */
 ul.list{

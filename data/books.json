@@ -12,5 +12,21 @@
     "date": "2025-02-05",
     "cover": "assets/img/9788979662764.jpg",
     "link": "https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=259678340"
+  },
+  {
+    "title": "Israel on the Brink",
+    "publisher": "교유서가",
+    "date": "2026-10-31",
+    "forthcoming": true,
+    "cover": "assets/img/israelonthebrink.jpg",
+    "link": "https://www.amazon.com/Israel-Brink-Revolutions-Decolonization-Coexistence/dp/0807018791"
+  },
+  {
+    "title": "Free to Be",
+    "publisher": "글항아리",
+    "date": "2026-11-30",
+    "forthcoming": true,
+    "cover": "assets/img/freetobe.jpg",
+    "link": "https://www.amazon.com/Free-Be-Understanding-Gender-Identity/dp/1668017040"
   }
 ]

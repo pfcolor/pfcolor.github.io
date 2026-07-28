@@ -12,15 +12,22 @@ function formatDate(iso) {
 
 function renderBooks(books) {
   const container = document.getElementById('book-list');
-  container.innerHTML = books.map(b => `
+  container.innerHTML = books.map(b => {
+    const cover = `<img class="cover${b.forthcoming ? ' forthcoming' : ''}" src="${b.cover}" alt="${b.title} 표지" loading="lazy">`;
+    const titleText = b.link ? `<a href="${b.link}" target="_blank" rel="noopener">${b.title}</a>` : b.title;
+    const sub = b.forthcoming ? `${b.publisher} · 출간 예정` : `${b.publisher} · ${formatDate(b.date)}`;
+    return `
     <div class="book">
-      <a class="cover-link" href="${b.link}" target="_blank" rel="noopener"><img class="cover" src="${b.cover}" alt="${b.title} 표지" loading="lazy"></a>
+      ${b.link
+        ? `<a class="cover-link" href="${b.link}" target="_blank" rel="noopener">${cover}</a>`
+        : `<span class="cover-link">${cover}</span>`}
       <div>
-        <div class="title"><a href="${b.link}" target="_blank" rel="noopener">${b.title}</a></div>
-        <div class="sub">${b.publisher} · ${formatDate(b.date)}</div>
+        <div class="title">${titleText}</div>
+        <div class="sub">${sub}</div>
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
 
 function renderList(containerId, items) {
