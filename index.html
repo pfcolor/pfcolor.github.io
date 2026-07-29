@@ -63,7 +63,10 @@
 <div class="wrap">
 
   <header>
-    <img class="photo" src="assets/img/profile.jpg" alt="김동욱 프로필 사진" loading="lazy">
+    <div class="photo-wrap">
+      <img class="photo" id="profilePhoto" src="assets/img/profile.jpg" alt="김동욱 프로필 사진" loading="lazy">
+      <div class="bubble" id="profileBubble">안녕하세요!</div>
+    </div>
     <div>
       <h1>김동욱</h1>
       <p class="intro">
@@ -128,5 +131,48 @@
 </div>
 
 <script src="script.js"></script>
+<script>
+(function(){
+  var photo = document.getElementById('profilePhoto');
+  var wrap = photo.closest('.photo-wrap');
+  var bubble = document.getElementById('profileBubble');
+  var clickTimes = [];
+  var hideTimer = null;
+  var maxedOut = false;
+
+  photo.addEventListener('click', function(){
+    if (maxedOut) {
+      bubble.textContent = '이제 그만 누르고 나가주세요…';
+      wrap.classList.add('show-bubble');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(function(){
+        wrap.classList.remove('show-bubble');
+      }, 1000);
+      return;
+    }
+
+    var now = Date.now();
+    clickTimes.push(now);
+    clickTimes = clickTimes.filter(function(t){ return now - t < 3000; });
+
+    if (clickTimes.length >= 20) {
+      bubble.textContent = '이제 그만 누르고 나가주세요…';
+      maxedOut = true;
+    } else if (clickTimes.length >= 10) {
+      bubble.textContent = '왜 자꾸 누르세요?';
+    } else if (clickTimes.length >= 5) {
+      bubble.textContent = '아야!';
+    } else {
+      bubble.textContent = '안녕하세요!';
+    }
+
+    wrap.classList.add('show-bubble');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(function(){
+      wrap.classList.remove('show-bubble');
+    }, 1000);
+  });
+})();
+</script>
 </body>
 </html>

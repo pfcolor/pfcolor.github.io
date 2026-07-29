@@ -29,12 +29,44 @@ header{
   gap:20px;
   margin-bottom:76px;
 }
+.photo-wrap{
+  position:relative;
+  flex-shrink:0;
+}
 .photo{
   width:76px;
   height:76px;
   border-radius:50%;
   object-fit:cover;
   flex-shrink:0;
+  cursor:pointer;
+}
+.bubble{
+  display:none;
+  position:absolute;
+  left:calc(100% + 14px);
+  bottom:calc(50% + 6px);
+  background:#fff;
+  color:#222;
+  padding:8px 14px;
+  border-radius:12px;
+  border:1px solid #e0e0e0;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  white-space:nowrap;
+  font-size:14px;
+  z-index:2;
+}
+.bubble::after{
+  content:"";
+  position:absolute;
+  right:100%;
+  bottom:10px;
+  border:7px solid transparent;
+  border-right-color:#fff;
+  filter:drop-shadow(-1px 0 0 #e0e0e0);
+}
+.photo-wrap.show-bubble .bubble{
+  display:block;
 }
 h1{
   font-family:'Gowun Batang', serif;
