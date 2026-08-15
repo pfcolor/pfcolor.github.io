@@ -3,7 +3,7 @@
   --ink: #232220;
   --ink-soft: #62605c;
   --line: #E3E0D8;
-  --accent: #3B72AE;      /* soft cornflower blue */
+  --accent: #2F5F92;      /* soft cornflower blue, darkened for contrast */
   --accent-soft: #EAF1F8;
 }
 *{box-sizing:border-box;}
