@@ -74,6 +74,35 @@ function updateCounts() {
   });
 }
 
+function initCopyButtons() {
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    let resetTimer;
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.copy;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+      const toast = btn.parentElement.querySelector('.copy-toast');
+      btn.classList.add('copied');
+      toast.classList.add('show');
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => {
+        btn.classList.remove('copied');
+        toast.classList.remove('show');
+      }, 1500);
+    });
+  });
+}
+
 async function init() {
   const [books, papers, articles] = await Promise.all([
     loadJSON('data/books.json'),
@@ -94,6 +123,8 @@ async function init() {
   document.querySelectorAll('.more[data-target]').forEach(initReveal);
   updateCounts();
 }
+
+initCopyButtons();
 
 init().catch(err => {
   console.error(err);

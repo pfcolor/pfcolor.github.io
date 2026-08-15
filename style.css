@@ -79,13 +79,15 @@ h1{
   font-size:15.5px;
   color:var(--ink-soft);
   max-width:52ch;
+  margin-bottom:0;
 }
 .intro a{color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(59,114,174,0.3);}
 .intro a:hover{border-bottom-color:var(--accent);}
 .meta{
   display:flex;
   flex-direction:column;
-  gap:6px;
+  gap:0;
+  margin-top:-5px;
   font-size:13.5px;
   color:var(--ink-soft);
 }
@@ -95,13 +97,120 @@ h1{
   gap:6px 10px;
 }
 .meta a{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
   color:var(--ink-soft);
   text-decoration:none;
   padding-bottom:1px;
   border-bottom:1px solid transparent;
 }
 .meta a:hover{ color:var(--accent); border-bottom-color:var(--accent); }
+.meta .links a{
+  position:relative;
+}
+.meta .links a::after{
+  content:"";
+  position:absolute;
+  inset:-8px -5px;
+}
 .meta .sep{ color:var(--line); }
+.meta .icon{
+  width:12px;
+  height:12px;
+  flex-shrink:0;
+  fill:currentColor;
+}
+.meta .mail-link .icon{
+  transform:translateY(1px);
+}
+.mail{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:23px;
+}
+.mail-pill{
+  position:relative;
+  display:flex;
+  align-items:stretch;
+  border:1px solid var(--accent);
+  border-radius:20px;
+}
+.meta .mail-link{
+  border-radius:20px 0 0 20px;
+  padding:5px 8px 5px 10px;
+  color:var(--accent);
+  font-weight:500;
+  border-bottom:none;
+}
+.meta .mail-link:hover{
+  background:var(--accent-soft);
+}
+.meta .mail-link .mail-label{
+  color:var(--ink-soft);
+  font-weight:400;
+}
+.meta .mail-link:hover .mail-label{
+  color:var(--accent);
+}
+.copy-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  align-self:stretch;
+  border:none;
+  border-left:1px solid var(--line);
+  border-radius:0 19px 19px 0;
+  margin:0;
+  padding:0;
+  background:none;
+  color:var(--ink-soft);
+  cursor:pointer;
+}
+.copy-btn:hover{ color:var(--accent); background:var(--accent-soft); }
+.copy-btn .icon{
+  width:13px;
+  height:13px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.copy-btn .check-icon{ display:none; }
+.copy-btn.copied .copy-icon{ display:none; }
+.copy-btn.copied .check-icon{ display:block; }
+.copy-btn.copied .icon{ color:#2f9e52; }
+.copy-toast{
+  position:absolute;
+  top:-30px;
+  right:0;
+  background:var(--ink);
+  color:#fff;
+  font-size:11px;
+  padding:4px 8px;
+  border-radius:6px;
+  opacity:0;
+  transform:translateY(4px);
+  transition:opacity .15s, transform .15s;
+  pointer-events:none;
+  white-space:nowrap;
+}
+.copy-toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+@media (pointer:coarse){
+  .meta .mail-link{
+    padding:10px 8px 10px 10px;
+  }
+  .copy-btn{
+    width:40px;
+  }
+}
 
 /* section */
 section{ margin-bottom:64px; }
@@ -221,4 +330,5 @@ footer{
 @media (max-width:480px){
   .wrap{ padding:56px 20px 80px; }
   h1{ font-size:27px; }
+  .mail-link .mail-label{ display:none; }
 }
