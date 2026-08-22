@@ -128,8 +128,12 @@ initCopyButtons();
 
 init().catch(err => {
   console.error(err);
+  document.querySelectorAll('.loading-state').forEach(el => el.remove());
   document.querySelector('.wrap').insertAdjacentHTML(
     'beforeend',
-    '<p style="color:#a33;">콘텐츠를 불러오지 못했습니다. data 폴더의 JSON 파일을 확인해 주세요.</p>'
+    `<div class="error-state" role="alert">
+      <p>콘텐츠를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</p>
+      <button type="button" onclick="location.reload()">다시 시도</button>
+    </div>`
   );
 });

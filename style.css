@@ -319,6 +319,38 @@ ul.list .date{
   font-size:11px;
 }
 
+.loading-state{
+  color:var(--ink-soft);
+  font-size:14px;
+}
+.books .loading-state{ font-size:14.5px; }
+ul.list li.loading-state{
+  border-bottom:none;
+  padding:12px 0;
+}
+
+.error-state{
+  margin-top:24px;
+  padding:20px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#fff;
+  color:var(--ink-soft);
+  font-size:14px;
+}
+.error-state p{ margin:0 0 12px; }
+.error-state button{
+  font-family:inherit;
+  font-size:13px;
+  color:var(--accent);
+  background:var(--accent-soft);
+  border:1px solid var(--accent);
+  border-radius:20px;
+  padding:6px 16px;
+  cursor:pointer;
+}
+.error-state button:hover{ background:var(--accent); color:#fff; }
+
 footer{
   margin-top:96px;
   padding-top:24px;
