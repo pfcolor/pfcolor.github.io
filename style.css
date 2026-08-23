@@ -267,7 +267,7 @@ section:last-child{ margin-bottom:0; }
 .book .title a:hover{ color:var(--accent); }
 .book .sub{ font-size:13.5px; color:var(--ink-soft); }
 .book .cover-link{ display:block; flex-shrink:0; }
-.book.forthcoming{ opacity:0.7; }
+.book.forthcoming .cover{ opacity:0.25; }
 .badge-forthcoming{
   display:inline-block;
   font-size:11px;
