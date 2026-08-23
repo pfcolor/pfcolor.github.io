@@ -21,17 +21,16 @@ function escapeHtml(str) {
 function renderBooks(books) {
   const container = document.getElementById('book-list');
   container.innerHTML = books.map(b => {
-    const cover = `<img class="cover" src="${b.cover}" alt="${b.title} 표지" loading="lazy">`;
+    const cover = `<img class="cover${b.forthcoming ? ' forthcoming' : ''}" src="${b.cover}" alt="${b.title} 표지" loading="lazy">`;
     const titleText = b.link ? `<a href="${b.link}" target="_blank" rel="noopener">${b.title}</a>` : b.title;
-    const badge = b.forthcoming ? `<span class="badge-forthcoming">출간 예정</span>` : '';
-    const sub = b.forthcoming ? b.publisher : `${b.publisher} · ${formatDate(b.date)}`;
+    const sub = b.forthcoming ? `${b.publisher} · 출간 예정` : `${b.publisher} · ${formatDate(b.date)}`;
     return `
-    <div class="book${b.forthcoming ? ' forthcoming' : ''}">
+    <div class="book">
       ${b.link
         ? `<a class="cover-link" href="${b.link}" target="_blank" rel="noopener">${cover}</a>`
         : `<span class="cover-link">${cover}</span>`}
       <div>
-        <div class="title">${titleText}${badge}</div>
+        <div class="title">${titleText}</div>
         <div class="sub">${sub}</div>
       </div>
     </div>
