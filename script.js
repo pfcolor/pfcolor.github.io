@@ -53,6 +53,12 @@ function initReveal(btn) {
   let shown = 0;
   let expanded = false;
 
+  const announcer = document.createElement('span');
+  announcer.className = 'sr-only';
+  announcer.setAttribute('role', 'status');
+  announcer.setAttribute('aria-live', 'polite');
+  btn.insertAdjacentElement('afterend', announcer);
+
   function render() {
     items.forEach((el, i) => { el.style.display = i < shown ? '' : 'none'; });
     if (shown >= total) {
@@ -81,9 +87,13 @@ function initReveal(btn) {
       container.closest('section').scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
     }
+    const revealedCount = Number(btn.dataset.next) - shown;
     expanded = true;
     shown = Number(btn.dataset.next);
     render();
+    announcer.textContent = shown >= total
+      ? `${revealedCount}개를 더 표시했습니다. 전체 ${total}개를 모두 표시했습니다.`
+      : `${revealedCount}개를 더 표시했습니다.`;
   });
 
   shown = Math.min(steps[0], total);
