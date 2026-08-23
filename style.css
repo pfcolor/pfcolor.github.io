@@ -254,6 +254,7 @@ section:last-child{ margin-bottom:0; }
   border-bottom:1px solid var(--line);
 }
 .book:last-child{ border-bottom:none; padding-bottom:0; }
+.book > div{ min-width:0; }
 .book .cover{
   width:52px;
   height:74px;
@@ -268,10 +269,18 @@ section:last-child{ margin-bottom:0; }
   margin-bottom:4px;
   display:flex;
   align-items:center;
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
   gap:6px;
+  min-width:0;
 }
-.book .title a{ color:var(--ink); text-decoration:none; }
+.book .title a{
+  color:var(--ink);
+  text-decoration:none;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  min-width:0;
+}
 .book .title a:hover{ color:var(--accent); }
 .book .sub{ font-size:13.5px; color:var(--ink-soft); }
 .book .cover-link{ display:block; flex-shrink:0; }
@@ -286,6 +295,7 @@ section:last-child{ margin-bottom:0; }
   border-radius:20px;
   padding:1px 8px;
   vertical-align:middle;
+  flex-shrink:0;
 }
 
 /* list rows — papers / articles */
