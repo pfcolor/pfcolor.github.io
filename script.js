@@ -10,6 +10,14 @@ function formatDate(iso) {
   return iso.replaceAll('-', '.');
 }
 
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 function renderBooks(books) {
   const container = document.getElementById('book-list');
   container.innerHTML = books.map(b => {
@@ -33,7 +41,7 @@ function renderBooks(books) {
 function renderList(containerId, items) {
   const container = document.getElementById(containerId);
   container.innerHTML = items.map(item => `
-    <li><a href="${item.url}" target="_blank" rel="noopener">${item.title}</a><span class="date">${formatDate(item.date)}</span></li>
+    <li><a href="${item.url}" target="_blank" rel="noopener" title="${escapeHtml(item.title)}">${item.title}</a><span class="date">${formatDate(item.date)}</span></li>
   `).join('');
 }
 
@@ -43,22 +51,37 @@ function initReveal(btn) {
   const steps = btn.dataset.steps.split(',').map(Number);
   const total = items.length;
   let shown = 0;
+  let expanded = false;
 
   function render() {
     items.forEach((el, i) => { el.style.display = i < shown ? '' : 'none'; });
     if (shown >= total) {
-      btn.hidden = true;
+      if (!expanded) {
+        btn.hidden = true;
+        return;
+      }
+      btn.hidden = false;
+      btn.classList.add('is-top');
+      btn.querySelector('.label').textContent = '위로';
+      btn.querySelector('.arrow').textContent = '▴';
       return;
     }
     btn.hidden = false;
+    btn.classList.remove('is-top');
     const nextStep = steps.find(s => s > shown);
     const nextShown = Math.min(nextStep === undefined ? total : nextStep, total);
     const remaining = nextShown - shown;
     btn.querySelector('.label').textContent = remaining + '개 더보기';
+    btn.querySelector('.arrow').textContent = '▾';
     btn.dataset.next = nextShown;
   }
 
   btn.addEventListener('click', () => {
+    if (btn.classList.contains('is-top')) {
+      container.closest('section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+    expanded = true;
     shown = Number(btn.dataset.next);
     render();
   });
